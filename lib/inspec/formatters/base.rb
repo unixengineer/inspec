@@ -149,6 +149,8 @@ module Inspec::Formatters
         code_description = example.metadata[:full_description]
       end
 
+      require 'pry'; binding.pry
+
       res = {
         id: example.metadata[:id],
         profile_id: example.metadata[:profile_id],
@@ -159,6 +161,7 @@ module Inspec::Formatters
         resource_title: example.metadata[:described_class] || example.metadata[:example_group][:description],
         expectation_message: format_expectation_message(example),
         waiver_data: example.metadata[:waiver_data],
+        resource_name: example.metadata[:described_class].class.superclass.name
       }
 
       unless (pid = example.metadata[:profile_id]).nil?
