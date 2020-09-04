@@ -161,6 +161,10 @@ module Inspec::Formatters
         resource_title: example.metadata[:described_class] || example.metadata[:example_group][:description],
         expectation_message: format_expectation_message(example),
         waiver_data: example.metadata[:waiver_data],
+        # This enforces the resource name as expected based off of the class
+        # name. However, if we wanted the `name` attribute against the class
+        # to be canonical for this case (consider edge cases!) we would use
+        # example.metadata[:described_class].instance_variable_get(:@__resource_name__)&.to_s
         resource_name: example.metadata[:described_class].class.superclass.name
       }
 
