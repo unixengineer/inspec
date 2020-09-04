@@ -149,7 +149,7 @@ module Inspec::Formatters
         code_description = example.metadata[:full_description]
       end
 
-      require 'pry'; binding.pry
+      # require 'pry'; binding.pry
 
       res = {
         id: example.metadata[:id],

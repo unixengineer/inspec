@@ -40,6 +40,7 @@ module Inspec::Reporters
           message:      r[:message],
           exception:    r[:exception],
           backtrace:    r[:backtrace],
+          resource_name: r[:resource_name]
         }.reject { |_k, v| v.nil? }
       }
     end
