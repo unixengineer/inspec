@@ -188,6 +188,18 @@ describe "inspec exec with json formatter" do
       _(ex1["impact"]).must_equal 0.7
     end
 
+    describe 'results' do
+      let(:result) { ex1["results"][0] }
+      it "has a code_desc" do
+        _(result["code_desc"]).must_equal "File / is expected to be directory"
+      end
+
+      it "has a resource_name" do
+        _(result["resource_name"]).must_equal "file"
+      end
+    end
+
+
     it "has all the metadata" do
       actual = profile.dup
       key = actual.delete("controls")
