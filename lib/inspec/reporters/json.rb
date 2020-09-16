@@ -41,6 +41,7 @@ module Inspec::Reporters
           exception:    r[:exception],
           backtrace:    r[:backtrace],
           resource_name: r[:resource_name],
+          resource_params: r[:resource_params_grep],
         }.reject { |_k, v| v.nil? }
       }
     end
