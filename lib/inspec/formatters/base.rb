@@ -166,7 +166,7 @@ module Inspec::Formatters
         resource_name: example.metadata[:described_class].class.superclass.name,
         # This is a raw grep of the text passed to the resource in any format,
         # and is used to enforce near-uniqueness against the resource.
-        resource_params_grep: example.metadata[:described_class].instance_variable_get(:@grep),
+        resource_params: find_resource_params(example.metadata[:described_class]),
       }
 
       unless (pid = example.metadata[:profile_id]).nil?
@@ -180,6 +180,14 @@ module Inspec::Formatters
       end
 
       res
+    end
+
+    def find_resource_params(example)
+      if example.class.ancestors.include?(Inspec::Resource)
+        example.instance_variable_get(:@resource_params)
+      else
+        []
+      end
     end
 
     def format_expectation_message(example)
