@@ -149,8 +149,6 @@ module Inspec::Formatters
         code_description = example.metadata[:full_description]
       end
 
-      # require 'pry'; binding.pry
-
       res = {
         id: example.metadata[:id],
         profile_id: example.metadata[:profile_id],
@@ -166,6 +164,9 @@ module Inspec::Formatters
         # to be canonical for this case (consider edge cases!) we would use
         # example.metadata[:described_class].instance_variable_get(:@__resource_name__)&.to_s
         resource_name: example.metadata[:described_class].class.superclass.name,
+        # This is a raw grep of the text passed to the resource in any format,
+        # and is used to enforce near-uniqueness against the resource.
+        resource_params_grep: example.metadata[:described_class].instance_variable_get(:@grep),
       }
 
       unless (pid = example.metadata[:profile_id]).nil?
