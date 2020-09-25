@@ -49,14 +49,14 @@ describe Inspec::CachedFetcher do
       InspecPlugins::Compliance::API.stubs(:profiles).returns(["success", profiles_result])
       cache = Inspec::Cache.new
       entry_path = cache.base_path_for(prof["sha256"])
-      mock_prefered_entry_for = Minitest::Mock.new
-      mock_prefered_entry_for.expect :call, entry_path, [prof["sha256"]]
+      mock_preferred_entry_for = Minitest::Mock.new
+      mock_preferred_entry_for.expect :call, entry_path, [prof["sha256"]]
       cf = Inspec::CachedFetcher.new("compliance://#{prof["owner"]}/#{prof["name"]}", cache)
       cache.stubs(:exists?).with(prof["sha256"]).returns(true)
-      cache.stub(:prefered_entry_for, mock_prefered_entry_for) do
+      cache.stub(:preferred_entry_for, mock_preferred_entry_for) do
         cf.fetch
       end
-      mock_prefered_entry_for.verify
+      mock_preferred_entry_for.verify
     end
   end
 end

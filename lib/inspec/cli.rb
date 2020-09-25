@@ -393,6 +393,13 @@ class Inspec::InspecCLI < Inspec::BaseCLI
   end
   map %w{-v --version} => :version
 
+  desc "clear_cache", "clears the InSpec cache at ~/.inspec/cache. Useful for\
+  debugging."
+  def clear_cache
+    FileUtils.rm_r Dir.glob(File.expand_path("~/.inspec/cache/*"))
+    puts "== InSpec cache cleared successfully =="
+  end
+
   private
 
   def run_command(opts)
